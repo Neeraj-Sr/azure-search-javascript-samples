@@ -39,9 +39,9 @@ export default function App() {
 
   // React Hook: useEffect when component changes
   // Empty array ensure this only runs once on mount
-  useEffect(() => {
-    fetchAuth()
-  }, []);
+  // useEffect(() => {
+  //   fetchAuth()
+  // }, []);
 
   const router = createHashRouter(
     createRoutesFromElements(
