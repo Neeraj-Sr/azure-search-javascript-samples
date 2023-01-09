@@ -12,7 +12,9 @@ module.exports = async function (context, req) {
     const id = (req.query.id || (req.body && req.body.id));
     console.log(id)
     blob_name = id+'/'+ blob_name
+    console.log(blob_name)
     sas_token = get_blob_sas(account_name,account_key, container_name, blob_name)
+    console.log(sas_token)
     url = 'https://'+account_name+'.blob.core.windows.net/'+container_name+'/'+blob_name+'?'+sas_token
 
    // context.log(url);
@@ -35,8 +37,9 @@ const get_blob_sas = (account_name,account_key, container_name, blob_name) => {
     const blobSAS = generateBlobSASQueryParameters({
         container_name, 
         blob_name,
-        permissions: BlobSASPermissions.parse("r"), // Required
-        expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+        permissions: BlobSASPermissions.parse("racwd"), // Required
+        startsOn: new Date(),
+        expiresOn: new Date(new Date().valueOf() + 86400) // Required. Date type
       },
       sharedKeyCredential
     ).toString();
