@@ -7,13 +7,14 @@ import apiBaseUrl from "../../../config";
 export default function Result(props) {
     
     console.log(`result prop = ${JSON.stringify(props)}`)
+    const imageBaseUrl = "https://docsexplorerfunc2.azurewebsites.net"
     const [imageurl, setImageUrl] = useState({});
   
-    axios.get(`${apiBaseUrl || ""}/api/getimage?id=${props.document.metadata_storage_path}`)
+    axios.get(`${imageBaseUrl || ""}/api/HttpTriggerFunc?name=${props.document.metadata_storage_path}`)
       .then(response => {
         console.log(JSON.stringify(response.data))
-        console.log(response.data.document)
-        setImageUrl(response.data.document)        
+        console.log(response.data)
+        setImageUrl(response.data)        
       })
       .catch(error => {
         console.log(error);
@@ -24,7 +25,7 @@ export default function Result(props) {
         <a href={`/#/details/${props.document.metadata_storage_path}`}>
             <img className="card-img-top" src={imageurl} ></img>
             <div className="card-body">
-                <h6 className="title-style">{props.document.metadata_storage_path}</h6>
+                <h6 className="title-style">{props.document.metadata_storage_name}</h6>
             </div>
         </a>
     </div>
