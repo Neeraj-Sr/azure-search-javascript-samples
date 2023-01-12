@@ -31,6 +31,7 @@ export default function Details() {
 
   }, [id]);
 
+  
   // View default is loading with no active tab
   let detailsBody = (<CircularProgress />),
       resultStyle = "nav-link",
@@ -38,12 +39,16 @@ export default function Details() {
 
   if (!isLoading && document) {
     // View result
+    const account_name = 'cs2100320024a648bca';
+    const container_name = 'azureblob-skillset-2-image-projection';
+    const blob_name = document.metadata_storage_path +'/'+ 'normalized_images_0.jpg';
+    const url = 'https://'+account_name+'.blob.core.windows.net/'+container_name+'/'+blob_name+'?'+"si=ReadPolicy&spr=https&sv=2021-06-08&sr=c&sig=RiP53EG6YGFZwp2pnFU61gtSc3KHL%2BIOtyEWQJJ9a6A%3D"
     if (selectedTab === 0) {
       resultStyle += " active";
       detailsBody = (
         <div className="card-body">
           <h5 className="card-title">{document.metadata_storage_name}</h5>
-          <img className="image" src={document.image_url} alt="Book cover"></img>
+          <img className="image" src={url} alt="Book cover"></img>
         </div>
       );
     }

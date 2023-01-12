@@ -1,9 +1,10 @@
 const { BlobServiceClient, BlobClient, generateBlobSASQueryParameters,BlobSASSignatureValues, BlobSASPermissions ,StorageSharedKeyCredential} = require("@azure/storage-blob");
-
+const { CONFIG } = require("../config");
 const account_name = 'cs2100320024a648bca';
 const account_key = 'iNKIX8G7Ih7ZgBGDK1EX7l19C1EDnNiae48O+InnYlQSHi0sPVE8HKjPYy57sWngpKi8kPELg21f+ASt+p1qKQ==';
 const container_name = 'azureblob-skillset-2-image-projection';
 
+sas_token = CONFIG.SASurlString ;
 
 module.exports = async function (context, req) {
 
@@ -15,7 +16,7 @@ module.exports = async function (context, req) {
     console.log("+++++")
     blob_name = id+'/'+ blob_name
     console.log(blob_name)
-    sas_token = get_blob_sas(account_name,account_key, container_name, blob_name)
+    //sas_token = get_blob_sas(account_name,account_key, container_name, blob_name)
     console.log(sas_token)
     url = 'https://'+account_name+'.blob.core.windows.net/'+container_name+'/'+blob_name+'?'+sas_token
 
@@ -47,11 +48,14 @@ const get_blob_sas = (account_name,account_key, container_name, blob_name) => {
     // },
     // sharedKeyCredential
     // ).toString();
+    // StringToSign = "r" + "\n" +       //Permissions in SAS e.g. read, write, list etc.
+    // new Date().toUTCString() + "\n" +             //Date/time in UTC when SAS token becomes effective.
+    // new Date(new Date().valueOf() + 86400).toUTCString() + "\n" +            //Date/time in UTC when SAS token expires.
+    // location_string + "\n"    //Canonical resource.
 
     const blobSAS = generateBlobSASQueryParameters({
         container_name, 
-        blob_name,
-        permissions: BlobSASPermissions.parse("r"), // Required
+        permissions: BlobSASPermissions.parse("r").toString(), // Required
         startsOn: new Date(),
         expiresOn: new Date(new Date().valueOf() + 86400) // Required. Date type
       },
