@@ -10,11 +10,12 @@ export default function Result(props) {
     const imageBaseUrl = "https://docsexplorerfunc2.azurewebsites.net"
     const [imageurl, setImageUrl] = useState({});
   
-    axios.get(`${imageBaseUrl || ""}/api/HttpTriggerFunc?name=${props.document.metadata_storage_path}`)
+    //axios.get(`${imageBaseUrl || ""}/api/HttpTriggerFunc?name=${props.document.metadata_storage_path}`)
+    axios.get(`${apiBaseUrl || ""}/api/getimage?id=${props.document.metadata_storage_path}`)
       .then(response => {
         console.log(JSON.stringify(response.data))
         console.log(response.data)
-        setImageUrl(response.data)        
+        setImageUrl(response.data.document)        
       })
       .catch(error => {
         console.log(error);
