@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import Rating from '@material-ui/lab/Rating';
+//import Rating from '@material-ui/lab/Rating';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import apiBaseUrl from "../../config";
@@ -15,7 +15,7 @@ export default function Details() {
   const [matchingdocs,setMatchingDocs] = useState({});
   const [selectedTab, setTab] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [resultCount, setcount] = useState(10)
+  //const [resultCount, setcount] = useState(10)
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,7 +37,6 @@ export default function Details() {
         const doc = response.data.document.value;
         console.log(doc);
         setMatchingDocs(doc);
-        setcount(10);
       })
       .catch(error => {
         console.log(error);
@@ -55,9 +54,10 @@ export default function Details() {
     // View result
     const account_name = 'cs2100320024a648bca';
     const container_name = 'azureblob-skillset-2-image-projection';
-    const blob_name = document.metadata_storage_path +'/'+ 'normalized_images_0.jpg';
-    const url = 'https://'+account_name+'.blob.core.windows.net/'+container_name+'/'+blob_name+'?'+"si=ReadPolicy&spr=https&sv=2021-06-08&sr=c&sig=RiP53EG6YGFZwp2pnFU61gtSc3KHL%2BIOtyEWQJJ9a6A%3D"
-   
+    const blob_name = `${document.metadata_storage_path}/normalized_images_0.jpg`;
+    console.log(blob_name);
+    const url = `https://${account_name}.blob.core.windows.net/${container_name}/${blob_name}?si=ReadPolicy&spr=https&sv=2021-06-08&sr=c&sig=RiP53EG6YGFZwp2pnFU61gtSc3KHL%2BIOtyEWQJJ9a6A%3D`
+    console.log(url)
     if (selectedTab === 0) {
       resultStyle += " active";
       detailsBody = (
