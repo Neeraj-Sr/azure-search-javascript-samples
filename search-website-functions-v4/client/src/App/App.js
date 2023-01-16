@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import { createHashRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 // Context for user authentication
@@ -24,24 +24,24 @@ export default function App() {
   // React Hook: useState with a var name, set function, & default value
   const [user, setUser] = useState({});
 
-  // Fetch authentication API & set user state
-  // async function fetchAuth() {
-  //   const response = await fetch("/.auth/me");
-  //   if (response) {
-  //     const contentType = response.headers.get("content-type");
-  //     if (contentType && contentType.indexOf("application/json") !== -1) {
-  //       response.json()
-  //         .then(response => setUser(response))
-  //         .catch(error => console.error('Error:', error));
-  //     }
-  //   }
-  // }
+ // Fetch authentication API & set user state
+  async function fetchAuth() {
+    const response = await fetch("/.auth/me");
+    if (response) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        response.json()
+          .then(response => setUser(response))
+          .catch(error => console.error('Error:', error));
+      }
+    }
+  }
 
-  // React Hook: useEffect when component changes
-  // Empty array ensure this only runs once on mount
-  // useEffect(() => {
-  //   fetchAuth()
-  // }, []);
+ // React Hook: useEffect when component changes
+ // Empty array ensure this only runs once on mount
+  useEffect(() => {
+    fetchAuth()
+  }, []);
 
   const router = createHashRouter(
     createRoutesFromElements(
