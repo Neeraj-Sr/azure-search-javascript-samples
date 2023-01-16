@@ -9,7 +9,7 @@ export default function Result(props) {
     console.log(`result prop = ${JSON.stringify(props)}`)
     const imageBaseUrl = "https://docsexplorerfunc2.azurewebsites.net"
     const [imageurl, setImageUrl] = useState({});
-  
+    console.log(props.document)
     //axios.get(`${imageBaseUrl || ""}/api/HttpTriggerFunc?name=${props.document.metadata_storage_path}`)
     axios.get(`${apiBaseUrl || ""}/api/getimage?id=${props.document.metadata_storage_path}`)
       .then(response => {

@@ -15,8 +15,9 @@ module.exports = async function (context, req) {
     
     // Returning the document with the matching id
     const document = await client.getDocument(id)
-
-    context.log(document);
+    console.log("+===========+")
+    console.log(document);
+    //context.log(document);
 
     context.res = {
         // status: 200, /* Defaults to 200 */

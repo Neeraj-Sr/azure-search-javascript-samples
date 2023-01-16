@@ -25,6 +25,7 @@ export default function Search() {
   const [ filters, setFilters ] = useState([]);
   const [ facets, setFacets ] = useState({});
   const [ isLoading, setIsLoading ] = useState(true);
+ 
 
   let resultsPerPage = top;
   
