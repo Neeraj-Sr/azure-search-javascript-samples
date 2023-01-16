@@ -26,10 +26,10 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AGREEABLE_SKY_06C76AA0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: "upload"
-          app_build_command:"npm install --legacy-peer-deps"
+          action: "upload"          
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_build_command: "npm install --legacy-peer-deps"
           app_location: "search-website-functions-v4/client" # App source code path
           api_location: "search-website-functions-v4/api" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
