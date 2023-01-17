@@ -7,7 +7,7 @@ class AzureSearchClient {
         // The query key is used for read-only requests and so can be distributed with less risk of abuse.
         this.queryKey = queryKey;
         this.indexName = indexName;
-        this.apiVersion = '2020-06-30-Preview';
+        this.apiVersion = '2021-04-30-Preview';
     }
 
     getIndexUrl() { return `https://${this.searchServiceName}.search.windows.net/indexes/${this.indexName}?api-version=${this.apiVersion}`; }
