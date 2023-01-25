@@ -3,24 +3,12 @@ import React, { useState } from "react";
 import './Result.css';
 import axios from 'axios';
 import apiBaseUrl from "../../../config";
+import getPage from "../../../getPage";
 
 export default function Result(props) {
     
-    console.log(`result prop = ${JSON.stringify(props)}`)
-   // const imageBaseUrl = "https://docsexplorerfunc2.azurewebsites.net"
-    const [imageurl, setImageUrl] = useState({});
-    console.log(props.document)
-    //axios.get(`${imageBaseUrl || ""}/api/HttpTriggerFunc?name=${props.document.metadata_storage_path}`)
-    axios.get(`${apiBaseUrl || ""}/api/getimage?id=${props.document.metadata_storage_path}`)
-      .then(response => {
-        console.log(JSON.stringify(response.data))
-        console.log(response.data)
-        setImageUrl(response.data.document)        
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
+  console.log(`result prop = ${JSON.stringify(props)}`)
+    const imageurl = getPage(props.document.metadata_storage_path,0);
     return(
     <div className="card result">
         <a href={`/#/details/${props.document.metadata_storage_path}`}>
