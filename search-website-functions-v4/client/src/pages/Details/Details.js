@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import apiBaseUrl from "../../config";
 import Result from '../../components/Results/Result/Result';
+import ImageDetails from "../../components/ImageDetails/ImageDetails";
 import getPage from "../../getPage";
 
 import "./Details.css";
@@ -32,6 +33,7 @@ export default function Details() {
         console.log(error);
         setIsLoading(false);
       });
+   
     axios.get(`${apiBaseUrl || ""}/api/getmorelikethis?id=${id}`)
       .then(response => {
         //console.log(JSON.stringify(response.data))
@@ -41,7 +43,8 @@ export default function Details() {
       })
       .catch(error => {
         console.log(error);
-      });   
+      }); 
+    
   }, [id]);
 
   
@@ -53,14 +56,15 @@ export default function Details() {
 
   if (!isLoading && document) {
     
-    const url = getPage(document.metadata_storage_path,0);
+    let url = getPage(document.metadata_storage_path,0);
    // console.log(url)
     if (selectedTab === 0) {
       resultStyle += " active";
       detailsBody = (
         <div className="card-body">
-          <h5 className="card-title">{document.metadata_storage_name}</h5>
-          <img className="image" src={url} alt="Book cover"></img>
+          <ImageDetails path={document.metadata_storage_path} name ={document.metadata_storage_name} ></ImageDetails>
+          {/* <h5 className="card-title">{document.metadata_storage_name}</h5>
+          <img className="image" src={url} alt="Book cover"></img> */}
         </div>
       );
     }
