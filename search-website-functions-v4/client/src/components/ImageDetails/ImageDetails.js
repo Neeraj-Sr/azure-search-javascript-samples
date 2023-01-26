@@ -20,9 +20,9 @@ export default function ImageDetails(props) {
     return (
         <div  >
         <ul className='menu_ul'>
-          <li><button onClick={handlePreviousPage}> &lt;&lt; </button></li>
+          <li><button className="text-only-button" onClick={handlePreviousPage}> &lt;&lt; </button></li>
           <li><h5 className="card-title">{props.name} Page# {page}</h5></li>
-          <li><button onClick={handleNextPage}> &gt;&gt; </button></li>
+          <li><button className="text-only-button" onClick={handleNextPage}> &gt;&gt; </button></li>
         </ul>
         <li><img  src={url} alt="No more Pages"></img></li>
         </div>
